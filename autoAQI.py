@@ -10,7 +10,7 @@ class Getpm:
         fanhui = {}
         jieguo = requests.get(pmurl)
         html = jieguo.text
-		# use regex to match pm2.5 and pm10 information
+        # use regex to match pm2.5 and pm10 information
         riqire = re.compile(r'(?:<div style=\'font-weight:normal;font-size:9px;\'>)(.*?)</div>')
         pm25re = re.compile(r'(?:<td id=\'hdrpm25\'  align=center style=\'font-size:10px;\'>)(.*?)</td>')
         pm10re = re.compile(r'(?:<td id=\'hdrpm10\'  align=center style=\'font-size:10px;\'>)(.*?)</td>')
@@ -30,9 +30,9 @@ class Mypm25(Getpm):
         self.smsuser = "your sms user, i use smsbao"
         self.smspass = "sms password encrypted with md5"
         self.smsnu = "phone number that used to receive message"
-        self.smsurl = "http://www.smsbao.com/sms"  # my sms service api
+        self.smsurl = "http://www.smsbao.com/sms"  # this is my sms service api
 
-	# send mail
+    # send mail
     def sendmail(self, content):
         me = "AQI" + "<" + self.mailuser + "@" + self.mailurl + ">"
         msg = MIMEText(content, _subtype='html', _charset='gb2312')
@@ -50,7 +50,7 @@ class Mypm25(Getpm):
             print str(e)
             return False
 
-	# send message
+    # send message
     def sendsms(self, content):
         mysms = {'u': self.smsuser, 'p': self.smspass, 'm': self.smsnu, 'c': content}
         try:
