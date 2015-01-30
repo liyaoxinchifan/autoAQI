@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import requests
-import urllib2
 import re
 import smtplib
 from email.mime.text import MIMEText
@@ -9,8 +8,8 @@ from email.mime.text import MIMEText
 class Getpm:
     def pmnow(self, pmurl):
         fanhui = {}
-        jieguo = urllib2.urlopen(pmurl)
-        html = jieguo.read()
+        jieguo = requests.get(pmurl)
+        html = jieguo.text
 		# use regex to match pm2.5 and pm10 information
         riqire = re.compile(r'(?:<div style=\'font-weight:normal;font-size:9px;\'>)(.*?)</div>')
         pm25re = re.compile(r'(?:<td id=\'hdrpm25\'  align=center style=\'font-size:10px;\'>)(.*?)</td>')
